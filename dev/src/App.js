@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ISATerms from './components/ISATerms';
 import ExpectedIncome from './components/ExpectedIncome';
+import TaxesInfo from './components/TaxesInfo';
+
 
 class App extends Component {
   state = {
@@ -8,7 +10,7 @@ class App extends Component {
     isaCap: 40000,
     isaPercentage: .17, // in decimal form
     isaTermLength: 36, // in months
-    projectedSalary: 50000
+    projectedSalary: 120000
   };
 
   changeTerms = () => {
@@ -47,6 +49,10 @@ class App extends Component {
           minimumSalary={this.state.minimumSalary}
           projectedSalary={this.state.projectedSalary}
         />
+        <TaxesInfo 
+          projectedSalary={this.state.projectedSalary}
+          thousandsSeparator={this.thousandsSeparator}
+        />
       </div>
     );
   };
@@ -60,5 +66,7 @@ export default App;
 -- react-dom 
 -- react-router-dom for { Route, BrowserRouter, Link } 
 -- styled-components for styled
+
+
 
 */
