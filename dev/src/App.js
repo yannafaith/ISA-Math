@@ -10,11 +10,14 @@ class App extends Component {
     isaCap: 40000,
     isaPercentage: .17, // in decimal form
     isaTermLength: 36, // in months
-    projectedSalary: 120000
+    projectedSalary: 95000
   };
 
   changeTerms = () => {
     let projSalary = prompt('What is your expected salary?');
+    if (projSalary == null) {
+      projSalary = this.state.minimumSalary
+    }
     this.setState({
       projectedSalary: projSalary,
     });
@@ -28,6 +31,10 @@ class App extends Component {
 
 
   render() {
+
+
+  let yearlyPayment = Math.ceil((this.state.projectedSalary || this.state.minimumSalary) * this.state.isaPercentage);
+
 
     return (
       <div className="App">
@@ -48,10 +55,12 @@ class App extends Component {
           isaPercentage={this.state.isaPercentage}
           minimumSalary={this.state.minimumSalary}
           projectedSalary={this.state.projectedSalary}
+          yearlyIsaPayment={yearlyPayment}
         />
         <TaxesInfo 
           projectedSalary={this.state.projectedSalary}
           thousandsSeparator={this.thousandsSeparator}
+          yearlyIsaPayment={yearlyPayment}
         />
       </div>
     );

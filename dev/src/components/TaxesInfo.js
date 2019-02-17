@@ -26,7 +26,8 @@ const TaxesInfo = props => {
 
     const stateTaxes3 = ((stateTaxBrackets[3].bracket - stateTaxBrackets[2].bracket)  * (stateTaxBrackets[2].marginal_rate / 100))
 
-    // need to make the calculation based on projSalary. Right now the taxes for 50k are wrong because a tax bracket higher than needed is calculated
+    // need to make the calculation based on projSalary. Right now the taxes for > 95k are wrong because tax brackets higher than needed are calculated
+
 
     const stateTaxes4 = (((props.projectedSalary - deductions.state) - stateTaxBrackets[3].bracket)  *(stateTaxBrackets[3].marginal_rate / 100))
 
@@ -40,16 +41,26 @@ const TaxesInfo = props => {
 
     const fedTaxes3 = ((fedTaxBrackets[3].bracket - fedTaxBrackets[2].bracket)  * (fedTaxBrackets[2].marginal_rate / 100))
 
-    // need to make the calculation based on projSalary. Right now the taxes for 50k are wrong because a tax bracket higher than needed is calculated
+    // need to make the calculation based on projSalary. Right now the taxes for > 95k are wrong because tax brackets higher than needed are calculated
 
     const fedTaxes4 = (((props.projectedSalary - deductions.federal) - fedTaxBrackets[3].bracket) * (fedTaxBrackets[3].marginal_rate / 100))
 
     const fedTaxes = Math.ceil(fedTaxes1 + fedTaxes2+ fedTaxes3 + fedTaxes4)
 
+    console.log(fedTaxes1, fedTaxes2, fedTaxes3, fedTaxes4)
+    console.log(fedTaxBrackets)
+    console.log(props.projectedSalary-deductions.federal)
+
     // FICA tax
 
     const FICATax = props.projectedSalary * (FICARate/100);
     const totalTaxAmount = stateTaxes + fedTaxes + FICATax
+
+    const effectiveStateTaxRate = (stateTaxes / props.projectedSalary) * 100
+    const effectiveFedTaxRate = (fedTaxes / props.projectedSalary) * 100
+
+    const roundedState = Math.round((effectiveStateTaxRate * 100 ))/100;
+    const roundedFed = Math.round((effectiveFedTaxRate * 100 ))/100;
 
     return (
         <div>
@@ -58,10 +69,12 @@ const TaxesInfo = props => {
             Federal Taxes Amount: ${props.thousandsSeparator(fedTaxes)} <br/>
             FICA Tax Amount: ${props.thousandsSeparator(FICATax)} <br/>
             Total Taxes Amount: ${props.thousandsSeparator(totalTaxAmount)} <br/>
-            Effective State Tax Rate: {(stateTaxes / props.projectedSalary) * 100} <br/>
-            Effective Federal Tax Rate: {(fedTaxes / props.projectedSalary) * 100} <br/>
-            {/* Need to refactor to make below dynamic */}
-            Take Home Salary After ISA and Taxes: {props.projectedSalary - (20400 + totalTaxAmount)}
+            Effective State Tax Rate: {roundedState}% <br/>
+            Effective Federal Tax Rate: {roundedFed}% <br/> <br/>
+            Take Home Salary after Taxes: ${props.thousandsSeparator(props.projectedSalary - totalTaxAmount)} <br/>
+            Monthly Take Home Salary after Taxes: ${props.thousandsSeparator(Math.round((props.projectedSalary - totalTaxAmount)/12))} <br/> <br/>
+            Take Home Salary After ISA and Taxes: ${props.thousandsSeparator(props.projectedSalary - (props.yearlyIsaPayment + totalTaxAmount))} <br/>
+            Monthly Take Home Salary: ${props.thousandsSeparator(Math.round((props.projectedSalary - (props.yearlyIsaPayment + totalTaxAmount))/12))}
 
 
         </div>
