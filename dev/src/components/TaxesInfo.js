@@ -14,6 +14,12 @@ const deductions = {
     state: Taxee[2019][state][maritalStatus].deductions[0].deduction_amount,
     federal: Taxee[2019].federal.tax_withholding_percentage_method_tables.annual.single.deductions[0].deduction_amount
 };
+console.log(Taxee[2019])
+const state2 = 'texas';
+// console.log(Taxee[2019][state2])
+console.log(fedTaxBrackets)
+
+// need to refine so states with no taxes return none.
 
 
 const TaxesInfo = props => {
@@ -47,9 +53,9 @@ const TaxesInfo = props => {
 
     const fedTaxes = Math.ceil(fedTaxes1 + fedTaxes2+ fedTaxes3 + fedTaxes4)
 
-    console.log(fedTaxes1, fedTaxes2, fedTaxes3, fedTaxes4)
-    console.log(fedTaxBrackets)
-    console.log(props.projectedSalary-deductions.federal)
+    // console.log(fedTaxes1, fedTaxes2, fedTaxes3, fedTaxes4)
+   // console.log(fedTaxBrackets)
+    // console.log(props.projectedSalary-deductions.federal)
 
     // FICA tax
 
@@ -71,12 +77,6 @@ const TaxesInfo = props => {
             Total Taxes Amount: ${props.thousandsSeparator(totalTaxAmount)} <br/>
             Effective State Tax Rate: {roundedState}% <br/>
             Effective Federal Tax Rate: {roundedFed}% <br/> <br/>
-            Take Home Salary after Taxes: ${props.thousandsSeparator(props.projectedSalary - totalTaxAmount)} <br/>
-            Monthly Take Home Salary after Taxes: ${props.thousandsSeparator(Math.round((props.projectedSalary - totalTaxAmount)/12))} <br/> <br/>
-            Take Home Salary After ISA and Taxes: ${props.thousandsSeparator(props.projectedSalary - (props.yearlyIsaPayment + totalTaxAmount))} <br/>
-            Monthly Take Home Salary: ${props.thousandsSeparator(Math.round((props.projectedSalary - (props.yearlyIsaPayment + totalTaxAmount))/12))}
-
-
         </div>
     );
 };
