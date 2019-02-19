@@ -1,26 +1,19 @@
 import React from 'react';
 
 const ExpectedIncome = props => {
-
-    let yearlyPayment = Math.ceil((props.projectedSalary || props.minimumSalary) * props.isaPercentage);
-    let monthlyPayment = Math.ceil(yearlyPayment / 12);
-    let totalPayment = monthlyPayment * props.isaTermLength;
-
-    if (totalPayment > props.isaCap) {
-      totalPayment = props.isaCap
-    };
-
-    let paymentMonths = Math.ceil(props.isaCap / monthlyPayment)
-
     return (
         <div>
-            <h3>ISA Payback Info</h3> <br/>
-            Yearly Payment: ${props.thousandsSeparator(yearlyPayment)} <br/>
-            Monthly Payment: ${props.thousandsSeparator(monthlyPayment)} <br/>
-            Total Payment: ${props.thousandsSeparator(totalPayment)} <br/>
-            Months of Payment: { totalPayment === props.isaCap ? paymentMonths : props.isaTermLength}
-      </div>
+            <h3>Adjusted Income</h3> <br/>
+            Take Home Salary after Taxes: ${props.thousandsSeparator(props.projectedSalary - props.totalTaxAmount)} <br/>
+            Monthly Take Home Salary after Taxes: ${props.thousandsSeparator(Math.round((props.projectedSalary - props.totalTaxAmount)/12))} <br/> <br/>
+            Take Home Salary sans State Taxes: ${props.thousandsSeparator(Math.round(props.projectedSalary-(props.fedTaxes+ props.FICATax)))} <br/>
+            Take Home Monthly Salary sans State Taxes: ${props.thousandsSeparator(Math.round((props.projectedSalary-(props.fedTaxes+ props.FICATax))/12))} <br/> <br/>
+            Take Home Salary After ISA and Fed Taxes: ${props.thousandsSeparator(props.projectedSalary - (props.yearlyIsaPayment + props.fedTaxes + props.FICATax))} <br/>
+            Monthly Take Home Salary: ${props.thousandsSeparator(Math.round((props.projectedSalary - (props.yearlyIsaPayment + props.fedTaxes + props.FICATax))/12))} <br/>  <br/>
+            Take Home Salary After ISA and Taxes: ${props.thousandsSeparator(props.projectedSalary - (props.yearlyIsaPayment + props.totalTaxAmount))} <br/>
+            Monthly Take Home Salary: ${props.thousandsSeparator(Math.round((props.projectedSalary - (props.yearlyIsaPayment + props.totalTaxAmount))/12))} <br/> 
+        </div>
     );
-};
+}
 
 export default ExpectedIncome;
