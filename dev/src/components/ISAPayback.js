@@ -13,7 +13,7 @@ const ISAPayback = props => {
 
     return (
         <div>
-            <h3>ISA Payback Info</h3> <br/>
+            <h3>ISA Payback Info</h3>
             Yearly Payment: ${props.thousandsSeparator(props.yearlyIsaPayment)} <br/>
             Monthly Payment: ${props.thousandsSeparator(monthlyPayment)} <br/>
             Total Payment: ${props.thousandsSeparator(totalPayment)} <br/>

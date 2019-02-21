@@ -1,7 +1,8 @@
 import React from 'react';
 import Taxee from 'taxee-tax-statistics';
 
-const state = 'arizona';
+/*
+const state = props.state || 'california';
 const maritalStatus = 'single';
 
 const FICARate = 7.65;
@@ -19,10 +20,25 @@ const state2 = 'texas';
 // console.log(Taxee[2019][state2])
 console.log(fedTaxBrackets)
 
-// need to refine so states with no taxes return none.
+// need to refine so states with no taxes return none. */
 
 
 const TaxesInfo = props => {
+
+    const state = props.state || 'california';
+    const maritalStatus = 'single';
+    console.log(state);
+
+    const FICARate = 7.65;
+
+    const stateTaxBrackets = Taxee[2019][state][maritalStatus].income_tax_brackets;
+
+    const fedTaxBrackets = Taxee[2019].federal.tax_withholding_percentage_method_tables.annual.single.income_tax_brackets;
+
+    const deductions = {
+    state: Taxee[2019][state][maritalStatus].deductions[0].deduction_amount,
+    federal: Taxee[2019].federal.tax_withholding_percentage_method_tables.annual.single.deductions[0].deduction_amount
+    };
 
     // State Marginal Tax Amounts
 
@@ -66,7 +82,7 @@ const TaxesInfo = props => {
     const effectiveFedTaxRate = (fedTaxes / props.projectedSalary) * 100
 
     const roundedState = Math.round((effectiveStateTaxRate * 100 ))/100;
-    const roundedFed = Math.round((effectiveFedTaxRate * 100 ))/100;
+    const roundedFed = Math.round((effectiveFedTaxRate * 100 ))/100; 
 
     return (
         <div>

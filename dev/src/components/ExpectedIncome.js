@@ -3,7 +3,7 @@ import React from 'react';
 const ExpectedIncome = props => {
     return (
         <div>
-            <h3>Adjusted Income</h3> <br/>
+            <h3>Adjusted Income</h3> 
             Take Home Salary after Taxes: ${props.thousandsSeparator(props.projectedSalary - props.totalTaxAmount)} <br/>
             Monthly Take Home Salary after Taxes: ${props.thousandsSeparator(Math.round((props.projectedSalary - props.totalTaxAmount)/12))} <br/> <br/>
             Take Home Salary sans State Taxes: ${props.thousandsSeparator(Math.round(props.projectedSalary-(props.fedTaxes+ props.FICATax)))} <br/>

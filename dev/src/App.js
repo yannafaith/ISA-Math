@@ -24,16 +24,16 @@ class App extends Component {
     isaCap: 40000,
     isaPercentage: .17, // in decimal form
     isaTermLength: 36, // in months
-    projectedSalary: 95000
+    projectedSalary: 95000,
+    currentState: null
   };
 
   changeTerms = () => {
     let projSalary = prompt('What is your expected salary?');
-    if (projSalary == null) {
-      projSalary = this.state.minimumSalary
-    }
+    let newState = prompt('What state are you in?')
     this.setState({
-      projectedSalary: projSalary,
+      projectedSalary: projSalary || this.state.minimumSalary,
+      currentState: newState || 'arizona'
     });
   };
 
@@ -49,7 +49,7 @@ class App extends Component {
 
   let yearlyPayment = Math.ceil((this.state.projectedSalary || this.state.minimumSalary) * this.state.isaPercentage);
 
-  const state = 'arizona';
+  const state = this.state.currentState || 'arizona';
   const maritalStatus = 'single';
 
   const FICARate = 7.65;
@@ -90,22 +90,16 @@ class App extends Component {
 
   const fedTaxes = Math.ceil(fedTaxes1 + fedTaxes2+ fedTaxes3 + fedTaxes4)
 
-  // console.log(fedTaxes1, fedTaxes2, fedTaxes3, fedTaxes4)
-  // console.log(fedTaxBrackets)
-  // console.log(props.projectedSalary-deductions.federal)
-
   // FICA tax
 
   const FICATax = this.state.projectedSalary * (FICARate/100);
   const totalTaxAmount = stateTaxes + fedTaxes + FICATax
 
-  const effectiveStateTaxRate = (stateTaxes / this.state.projectedSalary) * 100
-  const effectiveFedTaxRate = (fedTaxes / this.state.projectedSalary) * 100
+  // const effectiveStateTaxRate = (stateTaxes / this.state.projectedSalary) * 100
+  // const effectiveFedTaxRate = (fedTaxes / this.state.projectedSalary) * 100
 
-  const roundedState = Math.round((effectiveStateTaxRate * 100 ))/100;
-  const roundedFed = Math.round((effectiveFedTaxRate * 100 ))/100;
-
-
+  // const roundedState = Math.round((effectiveStateTaxRate * 100 ))/100;
+  //  const roundedFed = Math.round((effectiveFedTaxRate * 100 ))/100;
 
     return (
       <div>
@@ -133,6 +127,7 @@ class App extends Component {
             projectedSalary={this.state.projectedSalary}
             thousandsSeparator={this.thousandsSeparator}
             yearlyIsaPayment={yearlyPayment}
+            state={this.state.currentState}
           />
           <ExpectedIncome
             thousandsSeparator={this.thousandsSeparator}
