@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ISATerms from './components/ISATerms';
+import {ISATerms} from './components/ISATerms';
 import ExpectedIncome from './components/ExpectedIncome';
 import TaxesInfo from './components/TaxesInfo';
 import styled from 'styled-components';
@@ -10,11 +10,13 @@ import './App.css';
 const SContainer = styled.div`{
   display: flex;
   justify-content: space-evenly;
+  border: solid blue 2px;
 }`;
 
  const SHeaderCenter = styled.h2`{
    display: flex;
    justify-content: center;
+   border: solid green 2px;
  }`;
 
 

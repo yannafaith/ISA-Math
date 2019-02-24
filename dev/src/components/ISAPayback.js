@@ -1,4 +1,5 @@
 import React from 'react';
+import {SContainer} from './ISATerms'
 
 const ISAPayback = props => {
 
@@ -12,13 +13,13 @@ const ISAPayback = props => {
     let paymentMonths = Math.ceil(props.isaCap / monthlyPayment)
 
     return (
-        <div>
+        <SContainer>
             <h3>ISA Payback Info</h3>
             Yearly Payment: ${props.thousandsSeparator(props.yearlyIsaPayment)} <br/>
             Monthly Payment: ${props.thousandsSeparator(monthlyPayment)} <br/>
             Total Payment: ${props.thousandsSeparator(totalPayment)} <br/>
             Months of Payment: { totalPayment === props.isaCap ? paymentMonths : props.isaTermLength}
-      </div>
+      </SContainer>
     );
 };
 
