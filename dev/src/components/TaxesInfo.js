@@ -1,5 +1,6 @@
 import React from 'react';
 import Taxee from 'taxee-tax-statistics';
+import {SContainer} from './ISATerms'
 
 /*
 const state = props.state || 'california';
@@ -85,7 +86,7 @@ const TaxesInfo = props => {
     const roundedFed = Math.round((effectiveFedTaxRate * 100 ))/100; 
 
     return (
-        <div>
+        <SContainer>
             <h3>Taxes Info</h3>
             State Taxes Amount: ${props.thousandsSeparator(stateTaxes)} <br/>
             Federal Taxes Amount: ${props.thousandsSeparator(fedTaxes)} <br/>
@@ -93,7 +94,7 @@ const TaxesInfo = props => {
             Total Taxes Amount: ${props.thousandsSeparator(totalTaxAmount)} <br/>
             Effective State Tax Rate: {roundedState}% <br/>
             Effective Federal Tax Rate: {roundedFed}% <br/> <br/>
-        </div>
+        </SContainer>
     );
 };
 
