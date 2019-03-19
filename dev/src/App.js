@@ -35,12 +35,14 @@ class App extends Component {
     let newState = prompt('What state are you in?');
     let newPerc = prompt('What is your ISA payback percentage?');
     let newCap = prompt('What is your ISA Cap?');
+    let newTermLen = prompt('What is your ISA term length?');
     this.setState({
       projectedSalary: projSalary || this.state.minimumSalary,
       currentState: newState || 'arizona',
     });
     newCap && this.setState({isaCap: newCap});
     newPerc && this.setState({isaPercentage: newPerc});
+    newTermLen && this.setState({isaTermLength: newTermLen})
   };
 
   thousandsSeparator(num) {
