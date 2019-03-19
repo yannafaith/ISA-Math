@@ -32,11 +32,15 @@ class App extends Component {
 
   changeTerms = () => {
     let projSalary = prompt('What is your expected salary?');
-    let newState = prompt('What state are you in?')
+    let newState = prompt('What state are you in?');
+    let newPerc = prompt('What is your ISA payback percentage?');
+    let newCap = prompt('What is your ISA Cap?');
     this.setState({
       projectedSalary: projSalary || this.state.minimumSalary,
-      currentState: newState || 'arizona'
+      currentState: newState || 'arizona',
     });
+    newCap && this.setState({isaCap: newCap});
+    newPerc && this.setState({isaPercentage: newPerc});
   };
 
   thousandsSeparator(num) {
