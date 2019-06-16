@@ -10,13 +10,12 @@ import './App.css';
 const SContainer = styled.div`{
   display: flex;
   justify-content: space-evenly;
-  border: solid blue 2px;
 }`;
 
  const SHeaderCenter = styled.h2`{
    display: flex;
    justify-content: center;
-   border: solid green 2px;
+   border: solid blue 1px;
  }`;
 
 

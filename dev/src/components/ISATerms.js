@@ -2,13 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 export const SContainer = styled.div`{
-    background-color: white;
-        h3 {
-            background-color: white;
-        }
-        button {
-            background-color: white;
-        }
+    border: solid blue 1px;
+    height: 100%;
+    width: 275px;
+    padding: 10px;
+    margin-top: 10px;
 }`;
 
 export const ISATerms = props => {
